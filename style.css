@@ -1,0 +1,625 @@
+
+/* =================================
+   MONEYTRACK - RGB NEON THEME
+================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080d19;
+  color: #f1f5f9;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* RGB ANIMATION */
+
+@keyframes rgbGlow {
+  0% {
+    border-color: #00e5ff;
+    box-shadow: 0 0 8px #00e5ff;
+  }
+  25% {
+    border-color: #2563eb;
+    box-shadow: 0 0 12px #2563eb;
+  }
+  50% {
+    border-color: #a855f7;
+    box-shadow: 0 0 12px #a855f7;
+  }
+  75% {
+    border-color: #ec4899;
+    box-shadow: 0 0 12px #ec4899;
+  }
+  100% {
+    border-color: #00e5ff;
+    box-shadow: 0 0 8px #00e5ff;
+  }
+}
+
+@keyframes rgbText {
+  0% { color: #00e5ff; }
+  25% { color: #2563eb; }
+  50% { color: #a855f7; }
+  75% { color: #ec4899; }
+  100% { color: #00e5ff; }
+}
+
+@keyframes rgbBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 245px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 25px 18px;
+  background: #0d1628;
+  border-right: 2px solid #00e5ff;
+  animation: rgbGlow 8s linear infinite;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  animation: rgbText 8s linear infinite;
+}
+
+.sidebar a {
+  display: block;
+  padding: 14px;
+  margin: 10px 0;
+  color: #aebbd0;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #172944;
+  color: #00e5ff;
+  box-shadow: 0 0 12px #00e5ff;
+}
+
+/* MAIN CONTENT */
+
+.main,
+.main-content {
+  margin-left: 245px;
+  padding: 30px;
+  min-height: 100vh;
+}
+
+/* TOPBAR */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.topbar h1 {
+  font-size: 26px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-profile img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00e5ff;
+  animation: rgbGlow 8s linear infinite;
+}
+
+/* WELCOME */
+
+.welcome {
+  padding: 28px;
+  border-radius: 18px;
+  margin-bottom: 25px;
+  background: linear-gradient(
+    120deg,
+    #102c4d,
+    #17234b,
+    #301b50,
+    #102c4d
+  );
+  background-size: 300% 300%;
+  animation: rgbBackground 10s ease infinite,
+             rgbGlow 8s linear infinite;
+  border: 1px solid #00e5ff;
+}
+
+.welcome h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.welcome p {
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+/* SUMMARY CARDS */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: #101b2e;
+  border: 1px solid #00e5ff;
+  padding: 22px;
+  border-radius: 16px;
+  animation: rgbGlow 8s linear infinite;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  color: #aebbd0;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.card h2 {
+  font-size: 25px;
+  overflow-wrap: anywhere;
+}
+
+.card.income h2 {
+  color: #22c55e;
+}
+
+.card.expense h2 {
+  color: #fb7185;
+}
+
+/* PANELS */
+
+.panel {
+  background: #101b2e;
+  border: 1px solid #00e5ff;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 22px;
+  animation: rgbGlow 8s linear infinite;
+}
+
+.panel h2 {
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+/* FORM */
+
+input,
+select {
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0;
+  border-radius: 9px;
+  border: 1px solid #33445f;
+  background: #0a1425;
+  color: white;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 10px #00e5ff;
+}
+
+/* BUTTON */
+
+button {
+  padding: 13px 20px;
+  border: 1px solid #00e5ff;
+  border-radius: 9px;
+  background: linear-gradient(120deg, #075985, #1d4ed8, #6b21a8);
+  background-size: 200% 200%;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-position: right center;
+  animation: rgbGlow 4s linear infinite;
+  transform: translateY(-2px);
+}
+
+/* TRANSACTION HISTORY */
+
+#daftarTransaksi {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#daftarTransaksi > div {
+  background: #0b1628;
+  border: 1px solid #263a58;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+/* DEVELOPER PROFILE */
+
+.developer {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.developer img,
+#fotoProfilDev {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00e5ff;
+  animation: rgbGlow 8s linear infinite;
+}
+
+.developer h3 {
+  margin-bottom: 8px;
+}
+
+/* CHART */
+
+#grafik {
+  width: 100%;
+  min-height: 180px;
+  border-radius: 12px;
+  background: #0b1628;
+  padding: 15px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav {
+  display: none;
+}
+
+/* RESPONSIVE MOBILE */
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main,
+  .main-content {
+    margin-left: 0;
+    padding: 18px;
+    padding-bottom: 100px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar h1 {
+    font-size: 21px;
+  }
+
+  .welcome {
+    padding: 20px;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 13px 5px;
+    background: #0d1628;
+    border-top: 2px solid #00e5ff;
+    animation: rgbGlow 8s linear infinite;
+    z-index: 20;
+  }
+
+  .bottom-nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+/* REDUCE MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* PROFILE UPLOAD */
+
+.developer { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.developer img { width: 120px; height: 120px; }
+.developer-info { display: flex; flex-direction: column; gap: 12px; }
+
+/* ===== MONEYTRACK STATISTICS ===== */
+
+.stat-subtitle {
+  color: #94a3b8;
+  margin-bottom: 25px;
+}
+
+.stat-item {
+  margin-bottom: 25px;
+}
+
+.stat-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-heading strong {
+  font-size: 14px;
+}
+
+.stat-track {
+  width: 100%;
+  height: 15px;
+  background: #1e293b;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.stat-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.7s ease;
+}
+
+.income-fill {
+  background: linear-gradient(90deg, #00e5ff, #22c55e);
+  box-shadow: 0 0 12px #00e5ff;
+}
+
+.expense-fill {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  box-shadow: 0 0 12px #ec4899;
+}
+
+/* =================================
+   MONEYTRACK HORIZONTAL APP
+================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow: hidden;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.main {
+  height: 100vh;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.pages {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pages::-webkit-scrollbar {
+  display: none;
+}
+
+.page {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 10px 8px 35px;
+  overscroll-behavior: contain;
+}
+
+.page-heading {
+  margin: 15px 0 25px;
+}
+
+.page-heading h2 {
+  margin-bottom: 8px;
+}
+
+.page-heading p {
+  color: #94a3b8;
+}
+
+/* NAVIGATION ACTIVE */
+
+.sidebar a,
+.bottom-nav a {
+  transition: 0.3s;
+}
+
+.sidebar a.active,
+.bottom-nav a.active {
+  color: #00e5ff;
+  background: rgba(0, 217, 255, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.2);
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0 !important;
+    padding: 12px;
+    height: 100dvh;
+    padding-bottom: 85px;
+  }
+
+  .pages {
+    height: 100%;
+  }
+
+  .page {
+    padding: 8px 5px 25px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+}
+
+/* ===== TABUNGAN ===== */
+
+.summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-bottom: 25px; }
+.summary .card h2 { font-size: 22px; overflow-wrap: anywhere; }
+.summary .card p { color: #aebbd0; margin-bottom: 12px; }
+.summary .card small { color: #94a3b8; }
+.card.income { border-color: #22c55e; }
+.card.expense { border-color: #fb7185; }
+.card.saving { border-color: #facc15; }
+.card.saving h2 { color: #facc15; }
+
+.saving-fill { background: linear-gradient(90deg, #facc15, #f59e0b); box-shadow: 0 0 12px #facc15; }
+
+.transaction-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-left: 4px solid #263a58; }
+.transaction-item.pemasukan { border-left-color: #22c55e; }
+.transaction-item.pengeluaran { border-left-color: #fb7185; }
+.transaction-item.tabungan { border-left-color: #facc15; }
+.transaction-item small { display: block; color: #94a3b8; margin-top: 4px; }
+.transaction-item button { margin-left: 10px; padding: 8px 12px; }
+
+.badge { display: inline-block; font-size: 11px; padding: 2px 8px; margin-bottom: 4px; border-radius: 20px; color: #080d19; font-weight: bold; }
+.badge.pemasukan { background: #22c55e; }
+.badge.pengeluaran { background: #fb7185; }
+.badge.tabungan { background: #facc15; }
+
+#targetInfo { color: #cbd5e1; margin: 8px 0 14px; }
+
+@media (max-width: 768px) {
+  .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .summary .card { padding: 16px; }
+  .summary .card h2 { font-size: 17px; }
+}
+
+/* ===== LOGIN / MEMBER ===== */
+[hidden] { display: none !important; }
+.auth-box { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; background: #080d19; }
+.auth-card { width: 100%; max-width: 380px; background: #101b2e; border: 1px solid #00e5ff; border-radius: 16px; padding: 26px; animation: rgbGlow 8s linear infinite; }
+.auth-card .logo { margin-bottom: 18px; text-align: center; }
+.auth-card h3 { margin-bottom: 8px; }
+.auth-card button { width: 100%; margin-top: 8px; }
+.auth-card small { display: block; margin-top: 14px; color: #94a3b8; text-align: center; }
+.auth-pesan { color: #fb7185; min-height: 20px; font-size: 14px; margin-top: 6px; }
+.link-btn { background: none !important; border: 0 !important; color: #00e5ff; font-weight: normal; }
+
+/* ===== MUSIK ===== */
+.tombol-musik { position: fixed; top: 14px; right: 14px; z-index: 1100; width: 44px; height: 44px; padding: 0; border-radius: 50%; font-size: 20px; }
+
+/* ===== PLAYLIST & VIDEO ===== */
+.media-list { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; max-height: 320px; overflow-y: auto; }
+.media-item { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: #0b1628; border: 1px solid #263a58; border-radius: 10px; padding: 10px 12px; }
+.media-item.aktif { border-color: #00e5ff; box-shadow: 0 0 10px rgba(0,229,255,.4); }
+.media-item span { overflow-wrap: anywhere; font-size: 14px; }
+.media-item div { display: flex; gap: 6px; flex-shrink: 0; }
+.media-item button { padding: 6px 10px; }
+.pemutar { width: 100%; max-height: 60vh; border-radius: 12px; background: #000; margin-top: 10px; }
+
+/* ===== PERBAIKAN LAYOUT (rapi & penuh layar) ===== */
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+.app { width: 100%; height: 100vh; height: 100dvh; }
+
+.pages, .page { min-width: 0; }
+.page > *, .panel, .card, .welcome, .developer, .developer-info,
+.media-item, .media-item span { min-width: 0; max-width: 100%; }
+.panel { width: 100%; }
+.developer-info button { max-width: 100%; }
+
+@media (max-width: 768px) {
+  .main {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100vh;
+    height: 100dvh;
+  }
+  .pages { width: 100%; height: 100%; }
+  .page {
+    padding: 16px 16px calc(96px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .page-heading { margin: 4px 0 18px; padding-right: 56px; }
+  .topbar { padding-right: 56px; }
+  .panel { padding: 18px; margin-bottom: 18px; }
+  .developer { gap: 14px; }
+  .developer img { width: 96px; height: 96px; }
+  .bottom-nav { padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
+}
+
+#statusFoto { color: #94a3b8; min-height: 18px; }

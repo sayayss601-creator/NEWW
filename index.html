@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MONEYTRACK</title>
+  <script>
+window.addEventListener("error", function (e) {
+  var d = document.createElement("div");
+  d.style.cssText = "position:fixed;left:0;right:0;bottom:72px;z-index:3000;background:#7f1d1d;color:#fff;padding:8px 12px;font-size:12px";
+  d.textContent = "Error: " + e.message + " (" + String(e.filename || "").split("/").pop() + ":" + e.lineno + ")";
+  (document.body || document.documentElement).appendChild(d);
+});
+</script>
+<link rel="stylesheet" href="style.css?v=14">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#080d18">
+</head>
+<body>
+
+<div id="authBox" class="auth-box" hidden>
+  <form id="authForm" class="auth-card" autocomplete="off">
+    <h2 class="logo">MONEY<span>TRACK</span></h2>
+    <h3 id="authJudul">Masuk</h3>
+    <input type="text" id="authNama" placeholder="Nama lengkap" maxlength="40" hidden>
+    <input type="text" id="authUser" placeholder="Username" maxlength="20" autocapitalize="none" required>
+    <input type="password" id="authSandi" placeholder="Password (min. 6 karakter)" required>
+    <p id="authPesan" class="auth-pesan"></p>
+    <button type="submit" id="authKirim">Masuk</button>
+    <button type="button" id="authGanti" class="link-btn">Belum punya akun? Daftar</button>
+    <small>Akun pertama yang terdaftar otomatis menjadi Developer.</small>
+  </form>
+</div>
+
+<div class="app">
+
+  <!-- SIDEBAR DESKTOP -->
+  <aside class="sidebar">
+    <h2 class="logo">MONEY<span>TRACK</span></h2>
+    <p class="menu-title">MENU UTAMA</p>
+
+    <nav>
+      <a href="#home" class="active">▦ Dashboard</a>
+      <a href="#transaksi">↕ Transaksi</a>
+      <a href="#statistik">▥ Statistik</a>
+      <a href="#video">🎬 Video</a>
+      <a href="#profil">♙ Profil</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <p>PERSONAL FINANCE</p>
+      <small>Version 1.4</small>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <div class="pages" id="pages">
+
+      <!-- HALAMAN 1: HOME -->
+      <section class="page" id="home">
+
+        <header class="topbar">
+          <div>
+            <h2>Dashboard</h2>
+            <p id="tanggalSekarang">Memuat tanggal...</p>
+          </div>
+          <div class="user-profile">
+            <img id="fotoProfilDev"
+              src="https://placehold.co/100x100"
+              alt="Foto profil">
+            <div>
+              <b>Developer</b>
+              <small>Administrator</small>
+            </div>
+          </div>
+        </header>
+
+        <section class="welcome">
+          <div>
+            <h1>Welcome to MONEYTRACK!</h1>
+            <p>Kelola keuanganmu dengan lebih mudah.</p>
+          </div>
+          <span class="welcome-icon">💰</span>
+        </section>
+
+        <section class="summary">
+          <div class="card balance"><p>Saldo Utama</p><h2 id="saldo">Rp0</h2><small>Pemasukan - pengeluaran</small></div>
+          <div class="card income"><p>Total Pemasukan</p><h2 id="pemasukan">Rp0</h2><small>Uang masuk</small></div>
+          <div class="card expense"><p>Total Pengeluaran</p><h2 id="pengeluaran">Rp0</h2><small>Uang keluar</small></div>
+          <div class="card saving"><p>Saldo Tabungan</p><h2 id="tabungan">Rp0</h2><small>Terpisah dari saldo utama</small></div>
+        </section>
+
+        <section class="panel">
+          <h3>Target Tabungan</h3>
+          <p id="targetInfo">Belum ada target.</p>
+          <div class="stat-track"><div id="targetBar" class="stat-fill saving-fill"></div></div>
+          <input type="text" id="targetInput" inputmode="numeric" autocomplete="off" placeholder="Target tabungan (Rp), contoh: 1.000.000">
+          <button type="button" id="tombolTarget">Simpan Target</button>
+        </section>
+
+              </section>
+
+      <!-- HALAMAN 2: TRANSAKSI -->
+      <section class="page" id="transaksi">
+
+        <header class="page-heading">
+          <h2>Transaksi</h2>
+          <p>Catat uang masuk dan keluar.</p>
+        </header>
+
+        <section class="panel">
+          <h3>Tambah Transaksi</h3>
+
+          <form id="formTransaksi">
+            <input
+              type="text"
+              id="keterangan"
+              placeholder="Nama transaksi"
+              required
+            >
+
+            <input
+              type="text"
+              id="nominal"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="Nominal (Rp), contoh: 50.000"
+              required
+            >
+
+            <select id="jenis" required>
+              <option value="">Pilih jenis transaksi</option>
+              <option value="masuk">Pemasukan</option>
+              <option value="keluar">Pengeluaran</option>
+              <option value="tabungan">Tabungan (menabung)</option>
+            </select>
+
+            <button type="submit">+ Tambah Transaksi</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h3>Riwayat Transaksi</h3>
+          <p>Aktivitas keuangan terbaru.</p>
+          <select id="filterJenis">
+            <option value="semua">Semua</option>
+            <option value="pemasukan">Pemasukan</option>
+            <option value="pengeluaran">Pengeluaran</option>
+            <option value="tabungan">Tabungan</option>
+          </select>
+          <div id="daftarTransaksi">
+            <p>Belum ada transaksi.</p>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- HALAMAN 3: STATISTIK -->
+      <section class="page" id="statistik">
+
+        <header class="page-heading">
+          <h2>Statistik Keuangan</h2>
+          <p>Ringkasan pemasukan dan pengeluaran.</p>
+        </header>
+
+        <section class="panel">
+          <div class="section-header">
+            <h3>Perbandingan Keuangan</h3>
+
+            <select id="filterGrafik">
+              <option value="minggu">Minggu ini</option>
+              <option value="bulan" selected>Bulan ini</option>
+              <option value="tahun">Tahun ini</option>
+            </select>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-heading">
+              <span>🟢 Pemasukan</span>
+              <strong id="grafikPemasukanLabel">Rp0</strong>
+            </div>
+            <div class="stat-track">
+              <div id="grafikPemasukanBar"
+                class="stat-fill income-fill"></div>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-heading">
+              <span>🔴 Pengeluaran</span>
+              <strong id="grafikPengeluaranLabel">Rp0</strong>
+            </div>
+            <div class="stat-track">
+              <div id="grafikPengeluaranBar"
+                class="stat-fill expense-fill"></div>
+            </div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-heading"><span>🟡 Tabungan</span><strong id="grafikTabunganLabel">Rp0</strong></div>
+            <div class="stat-track"><div id="grafikTabunganBar" class="stat-fill saving-fill"></div></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>Informasi</h3>
+          <p>Grafik mengikuti data transaksi yang tersimpan.</p>
+        </section>
+
+      </section>
+
+      <!-- HALAMAN: VIDEO -->
+      <section class="page" id="video">
+        <header class="page-heading">
+          <h2>Video</h2>
+          <p>Putar video anime koleksi Anda sendiri.</p>
+        </header>
+
+        <section class="panel">
+          <h3 id="judulVideo">Pemutar</h3>
+          <video id="pemutarVideo" class="pemutar" controls playsinline hidden></video>
+        </section>
+
+        <section class="panel">
+          <h3>Koleksi Video</h3>
+          <p id="statusVideo">Belum ada video.</p>
+          <div id="daftarVideo" class="media-list"></div>
+          <button type="button" id="tombolPilihVideo">🎬 Tambah Video (bisa banyak)</button>
+          <button type="button" id="tombolFeed">📱 Mode TikTok (geser ke atas)</button>
+          <button type="button" id="tombolAcak">🔀 Acak: Mati</button>
+          <input type="file" id="pilihVideo" accept="video/*" multiple hidden>
+        </section>
+      </section>
+
+      <!-- HALAMAN 4: PROFIL -->
+      <section class="page" id="profil">
+        <header class="page-heading">
+          <h2>Profil Developer</h2>
+          <p>Informasi pengembang MONEYTRACK.</p>
+        </header>
+
+        <section class="panel">
+          <div class="developer">
+            <img id="fotoProfilUtama" src="https://placehold.co/150x150/101b2e/00e5ff?text=PROFILE" alt="Foto profil developer">
+            <div class="developer-info">
+              <h3>Developer MONEYTRACK</h3>
+              <p>Personal Finance Management</p>
+              <button type="button" id="tombolGantiFoto">📷 Ganti Foto Profil</button>
+              <input type="file" id="uploadFoto" accept="image/*" hidden>
+              <small id="statusFoto"></small>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>Playlist Musik</h3>
+          <p id="statusLagu">Belum ada lagu.</p>
+          <div id="daftarLagu" class="media-list"></div>
+          <button type="button" id="tombolPilihLagu">🎵 Tambah Lagu (bisa banyak)</button>
+          <input type="file" id="pilihLagu" accept="audio/*" multiple hidden>
+        </section>
+
+        <section class="panel">
+          <h3>Akun Saya</h3>
+          <p id="infoMember">-</p>
+          <button type="button" id="tombolKeluar">Keluar</button>
+        </section>
+
+        <section class="panel" id="panelAdmin" hidden>
+          <h3>Panel Developer</h3>
+          <p id="jumlahMember">Total member terdaftar: 0</p>
+          <button type="button" id="tombolUnduhMember">⬇ Unduh Daftar Member (CSV)</button>
+        </section>
+
+        <section class="panel">
+          <h3>Tentang MONEYTRACK</h3>
+          <p>Aplikasi pencatatan keuangan pribadi.</p>
+          <p>Version 1.4</p>
+        </section>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- NAVIGASI MOBILE -->
+<nav class="bottom-nav">
+  <a href="#home" class="active">⌂<small>Home</small></a>
+  <a href="#transaksi">↕<small>Transaksi</small></a>
+  <a href="#statistik">▥<small>Statistik</small></a>
+  <a href="#video">🎬<small>Video</small></a>
+  <a href="#profil">♙<small>Profil</small></a>
+</nav>
+
+<div id="feedVideo" class="feed" hidden>
+  <button type="button" id="feedTutup" class="feed-tutup" aria-label="Tutup">✕</button>
+  <div id="feedScroll" class="feed-scroll"></div>
+</div>
+
+<audio id="musikIntro" preload="auto"></audio>
+<button type="button" id="tombolMusik" class="tombol-musik">🔇</button>
+<script src="musik.js?v=14"></script>
+<script src="video.js?v=14"></script>
+<script src="auth.js?v=14"></script>
+<script src="script.js?v=14"></script>
+</body>
+</html>
